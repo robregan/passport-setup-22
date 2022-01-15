@@ -1,6 +1,8 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config()
+// }
+
+process.env.NODE_ENV !== 'production' && require('dotenv').config()
 
 const express = require('express')
 const app = express()
@@ -9,7 +11,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-
+const PORT = process.env.PORT
 const initializePassport = require('./passport-config')
 initializePassport(
   passport,
@@ -84,4 +86,4 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.listen(3000)
+app.listen(process.env.PORT, () => console.log(`server running on port ${PORT}! `))
